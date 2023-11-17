@@ -39,10 +39,12 @@ const Preloader = ({ className }: propsType) => {
           style={{
             width: width + "%",
           }}
-          className="h-4 relative rounded-full bg-slate-400 bg-gradient-to-tl from-blue-700 via-blue-800 to-gray-900 shadow-inner"
+          className="h-4 relative rounded-full bg-slate-400 bg-gradient-to-r from-orange-400 to-rose-400 shadow-inner"
         >
           <div className="w-8 h-8 rounded-tl-full rounded-tr-full rounded-bl-full shadow-inner shadow-md top-[-30px] right-[-14px] rotate-45 flex justify-center items-center bg-slate-200 absolute">
-            <div className="rotate-[-45deg]">{width}</div>
+            <Gradienttext className="rotate-[-45deg] bg-gradient-to-r from-orange-400 to-rose-400">
+              {width}
+            </Gradienttext>
           </div>
         </div>
       </div>
@@ -63,7 +65,7 @@ const Welcomescreen = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoaded(true);
-    }, timeLimit * 100);
+    }, timeLimit * 150);
   }, []);
 
   return (

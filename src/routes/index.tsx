@@ -11,11 +11,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Home" element={<Home />} />
-        <Route
-          path="/Loadinganimation"
-          element={<Cs title="Loadinganimation" />}
-        />
-        <Route path="/Welcomescreen" element={<Cs title="Welcomescreen" />} />
+        <Route path="/:id" element={<Cs />} />
         <Route path="*" element={<Errors className="fixed top-0" />} />
       </Routes>
     </>
