@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import Gradienttext from "@/components/custom/Gradienttext";
+import Fullscreen from "@/components/section/Fullscreen";
 
 type propsType = {
   className?: string;
@@ -9,23 +10,25 @@ const Loaders = ({ className }: propsType) => {
   return (
     <div
       className={cn(
-        "w-full min-h-screen gap-y-6 relative flex justify-center items-center flex-col",
+        "w-full min-h-screen md:grid md:grid-cols-2 gap-y-6 relative flex justify-center items-center flex-col",
         className,
       )}
     >
-      <div className="flex justify-center items-center relative">
+      <Fullscreen>
         <div className="animate-spin p-32 border-t-slate-900 border-b-slate-900 rounded border-8 border-transparent rounded-full"></div>
         <Gradienttext className="absolute font-bold text-3xl">
           Animation-1
         </Gradienttext>
-      </div>
-      <div className="flex justify-center items-center relative">
+      </Fullscreen>
+
+      <Fullscreen>
         <div className="animate-spin p-28 border-[50px] border-b-slate-900 rounded-full"></div>
         <Gradienttext className="absolute font-bold text-2xl">
           Animation-2
         </Gradienttext>
-      </div>
-      <div className="flex h-[350px] justify-center items-center flex-col relative">
+      </Fullscreen>
+
+      <Fullscreen className="h-[350px] flex-col">
         <div className="animate-ping delay-200 absolute border-8 border-cyan-500 bg-cyan-600 p-20 rounded-full"></div>
         <div className="animate-ping delay-150 absolute border-8 border-cyan-500 bg-cyan-600 p-16 rounded-full"></div>
         <div className="animate-ping delay-100 absolute border-8 border-cyan-500 bg-cyan-600 p-12 rounded-full"></div>
@@ -34,8 +37,9 @@ const Loaders = ({ className }: propsType) => {
         <Gradienttext className="font-bold z-30 text-2xl">
           Animation-3
         </Gradienttext>
-      </div>
-      <div className="flex justify-center items-center flex-col relative">
+      </Fullscreen>
+
+      <Fullscreen className="flex-col">
         <div className="flex gap-x-2 justify-center items-center">
           <div className="animate-bounce delay-0 p-2 rounded-full bg-slate-900"></div>
           <div className="animate-bounce delay-75 p-2 rounded-full bg-slate-900"></div>
@@ -44,7 +48,8 @@ const Loaders = ({ className }: propsType) => {
           <div className="animate-bounce delay-200 p-2 rounded-full bg-slate-900"></div>
           <div className="animate-bounce delay-300 p-2 rounded-full bg-slate-900"></div>
         </div>
-      </div>
+        <Gradienttext>Animation-4</Gradienttext>
+      </Fullscreen>
     </div>
   );
 };

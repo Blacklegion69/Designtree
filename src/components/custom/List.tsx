@@ -16,16 +16,10 @@ const List = () => {
       path: "Loadinganimation",
     },
     {
-      name: "Loading Animation",
-      show: "Loaders",
-      date: "15/11/2023, 10:58:07",
-      path: "Loadinganimation",
-    },
-    {
-      name: "Loading Animation",
-      show: "Loaders",
-      date: "15/11/2023, 10:58:07",
-      path: "Loadinganimation",
+      name: "Welcome screen preloader",
+      show: "Preloader",
+      date: "17/11/2023, 11:07:07",
+      path: "Welcomescreen",
     },
   ];
 
