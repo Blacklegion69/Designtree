@@ -83,6 +83,12 @@
   body {
     @apply bg-background text-foreground;
   }
+  .text {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-fill-color: transparent;
+  }
   .grad {
     background: -webkit-linear-gradient(
       to right,
