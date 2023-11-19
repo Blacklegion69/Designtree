@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
+import Copy from "@/components/custom/Copy";
+import { SymbolIcon } from "@radix-ui/react-icons";
 type propsType = {
   className?: string;
 };
@@ -18,73 +19,91 @@ interface gradientType {
 }
 
 const Gradientgenerator = ({ className }: propsType) => {
-  const [color, setColor] = useState<string>("#ffffff");
-  const [gradient, setGradient] = useState<gradientType[]>([
-    {
-      id: "0b8546c5-2f77-4c13-be59-1ce7717605a8",
-      color: "#ff00f2",
-    },
-    {
-      id: "e1156cfa-42c6-40b9-a185-a3248ddd8006",
-      color: "#ff0000",
-    },
-    {
-      id: "3eb2c4bb-6a02-432d-b51f-5b92780eaded",
-      color: "#f6ff00",
-    },
-  ]);
-  const [background, setBackground] = useState(
-    "-webkit-linear-gradient(45deg, #ff00f2,#ff0000,#f6ff00)",
-  );
-  const [rotation, setRotation] = useState<number>(45);
-  const [negativeRotation, setNegativeRotation] = useState(false);
-  const [repeating, setRepeating] = useState(false);
-  const [repeatingLength, setRepeatingLength] = useState(20);
-  const [unit, setUnit] = useState("px");
-
-  const handleColor = (e: any) => {
-    setColor(e.target.value.toString());
-  };
-
-  const handleColorvalue = (e: any) => {
-    setColor(e.target.value);
-  };
-
-  const handleAdd = () => {
-    setGradient([...gradient, { id: crypto.randomUUID(), color }]);
-  };
-
-  const handleColorDelete = (colorid: string) => {
-    const filtered = gradient.filter((color) => {
-      return color.id !== colorid;
-    });
-    setGradient(filtered);
-  };
-
-  const handleRotation = (e: any) => {
-    setRotation(e);
-  };
-
-  const handleDice = () => {
+  const makeHexaColor = () => {
     const hexadecimalCode = "0123456789abcdef".split("");
     let hexacode = "#";
     for (let i = 0; i < 6; i++) {
       const random = Math.floor(Math.random() * hexadecimalCode.length);
       hexacode += hexadecimalCode[random];
     }
-    setColor(hexacode);
+    return hexacode;
   };
 
+  const [color, setColor] = useState<string>(makeHexaColor());
+  const [gradient, setGradient] = useState<gradientType[]>([
+    {
+      id: "0b8546c5-2f77-4c13-be59-1ce7717605a8",
+      color: makeHexaColor(),
+    },
+    {
+      id: "e1156cfa-42c6-40b9-a185-a3248ddd8006",
+      color: makeHexaColor(),
+    },
+    {
+      id: "3eb2c4bb-6a02-432d-b51f-5b92780eaded",
+      color: makeHexaColor(),
+    },
+  ]);
+  const [background, setBackground] = useState<string>("");
+  const [rotation, setRotation] = useState<number>(
+    Math.floor(Math.random() * 360),
+  );
+  const [negativeRotation, setNegativeRotation] = useState(false);
+  const [repeating, setRepeating] = useState(false);
+  const [repeatingLength, setRepeatingLength] = useState(
+    Math.floor(Math.random() * 36),
+  );
+  const [unit, setUnit] = useState("px");
+
+  const handleColor = (e: any) => {
+    setColor(e.target.value.toString());
+  };
+  const handleColorvalue = (e: any) => {
+    setColor(e.target.value);
+  };
+  const handleAdd = () => {
+    setGradient([...gradient, { id: crypto.randomUUID(), color }]);
+  };
+  const handleColorDelete = (colorid: string) => {
+    const filtered = gradient.filter((color) => {
+      return color.id !== colorid;
+    });
+    setGradient(filtered);
+  };
+  const handleRotation = (e: any) => {
+    setRotation(e);
+  };
+  const handleDice = () => {
+    const randomColor = makeHexaColor();
+    setColor(randomColor);
+  };
   const handleNegativeRotation = (e: any) => {
     setNegativeRotation(e);
   };
-
   const handleRepeating = (e: any) => {
     setRepeating(e);
   };
-
   const handleUnit = (e: any) => {
     setUnit(e);
+  };
+
+  const generateGradient = () => {
+    setRotation(() => Math.floor(Math.random() * 360));
+    setRepeatingLength(Math.floor(Math.random() * 60));
+    setGradient([
+      {
+        id: "0b8546c5-2f77-8876-be59-1ce7717605a8",
+        color: makeHexaColor(),
+      },
+      {
+        id: "e1156cfa-42c6-1243-a185-a3248ddd8006",
+        color: makeHexaColor(),
+      },
+      {
+        id: "3eb2c4bb-6a02-9173-b51f-5b92780eaded",
+        color: makeHexaColor(),
+      },
+    ]);
   };
 
   useEffect(() => {
@@ -124,13 +143,25 @@ const Gradientgenerator = ({ className }: propsType) => {
         style={{
           background,
         }}
-        className="w-4/5 h-16 rounded shadow-md"
-      ></div>
-      <div className="w-4/5 bg-slate-300 rounded shadow-md flex justify-center items-center overflow-y-scroll p-2 text-xs my-2">
+        className="w-4/5 h-28 rounded relative shadow-md"
+      >
+        <Button
+          onClick={generateGradient}
+          className=" top-[-40px] absolute px-2 right-0 gap-x-1"
+        >
+          <SymbolIcon />{" "}
+          <Gradienttext className=" bg-[conic-gradient(at_bottom_left,_var(--tw-gradient-stops))] from-[#f46b45] via-[#ffa849] to-[#f46b45]">
+            {" "}
+            Random
+          </Gradienttext>{" "}
+        </Button>
+      </div>
+      <div className="w-4/5 bg-slate-300 rounded shadow-md flex justify-between gap-x-1 items-center overflow-y-scroll p-2 text-xs my-2">
         {/*background.split(",").map((d, id) => {
           return <Gradienttext key={id}>{d.replace("#", ",#")}</Gradienttext>;
         })*/}
-        {background}
+        <div> {background}</div>
+        <Copy text={background} className="font-bold" />
       </div>
 
       <div className="w-4/5 my-2 gap-y-2 p-2 bg-slate-300 rounded flex flex-col shadow-md">
@@ -206,7 +237,7 @@ const Gradientgenerator = ({ className }: propsType) => {
       ) : (
         ""
       )}
-      <div className="w-4/5 max-h-[150px] overflow-y-scroll flex justify-center items-center flex-wrap gap-2 shadow-md p-2 bg-slate-300 p-2 rounded my-2">
+      <div className="w-4/5 max-h-[100px] overflow-y-scroll flex justify-center items-center flex-wrap gap-2 shadow-md p-2 bg-slate-300 p-2 rounded my-2">
         {gradient.map((d, id) => {
           return (
             <div
