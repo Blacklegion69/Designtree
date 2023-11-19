@@ -290,13 +290,19 @@ const Gradientgenerator = ({ className }: propsType) => {
             </Gradienttext>
           </Button>
         </div>
-        <Slider
-          className="my-2"
-          onValueChange={handleRotation}
-          defaultValue={[rotation]}
-          max={360}
-          step={1}
-        />
+        <div className="w-full gap-x-1 flex">
+          <Gradienttext className="w-[50px] font-bold text-center">
+            {rotation}
+          </Gradienttext>
+          <Slider
+            className="my-2"
+            onValueChange={handleRotation}
+            defaultValue={[rotation]}
+            value={[rotation]}
+            max={360}
+            step={1}
+          />
+        </div>
       </div>
     </Fullscreen>
   );
